@@ -10,12 +10,31 @@ const personalMovieDB = {
     privat: false  
 };
 
-const a = prompt('What film did u see the last?','');
-const b = prompt('What mark of film?','');
-const c = prompt('What film did u see the last?','');
-const d = prompt('What mark of film?','');
+if(numberOfFilms < 10)
+    alert('Malo');
+    else if(numberOfFilms >=10 && numberOfFilms <= 30)
+        alert('Norm');
+        else 
+        alert('Kinoman');
 
-personalMovieDB.movies[a] = b;
-personalMovieDB.movies[c] = d;
+
+for(let i = 0; i < 2; i++){
+    const a = prompt('What film did u see the last?','');
+    const b = prompt('What mark of film?','');
+    
+    if(a != null && b != null && a !='' && b != '' && a.length < 50){
+        personalMovieDB.movies[a] = b;
+        console.log('dassad');
+    } else {
+        i--;
+    }
+
+    
+    
+}
+
+
 
 console.log(personalMovieDB);
+
+
