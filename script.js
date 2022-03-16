@@ -1,79 +1,70 @@
 "use strict";
 
-
-
-
-
-
-
-let numberOfFilms;
-
-function start() {
-     numberOfFilms = +prompt('How nany movies did u see?', '');
-
-     while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
-        numberOfFilms = +prompt('How nany movies did u see?', '');
-     }
-}
-
-
-
 const personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
-    privat: false
-};
-
-
-function rememberMyFilms() {
-    for(let i = 0; i < 2; i++){
+    privat: false,
+    start: function() {
+        personalMovieDB.count = +prompt('How nany movies did u see?', '');
+   
+        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+            personalMovieDB.count = +prompt('How nany movies did u see?', '');
+        }
+   },
+   detectPersonalLevel: function() {
+    if(personalMovieDB.count < 10)
+        alert('Malo');
+    else if(personalMovieDB.count >=10 && personalMovieDB.count <= 30)
+        alert('Norm');
+        else 
+        alert('Kinoman');
+},
+   rememberMyFilms: function() {
+    for (let i = 0; i < 2; i++) {
         const a = prompt('What film did u see the last?','');
         const b = prompt('What mark of film?','');
         
-        if(a != null && b != null && a !='' && b != '' && a.length < 50){
+        if (a != null && b != null && a !='' && b != '' && a.length < 50) {
             personalMovieDB.movies[a] = b;
-            console.log('dassad');
         } else {
             i--;
         }
     }
-
-}
-
-
-
-
-function detectPersonalLevel() {
-    if(numberOfFilms < 10)
-    alert('Malo');
-    else if(numberOfFilms >=10 && numberOfFilms <= 30)
-        alert('Norm');
-        else 
-        alert('Kinoman');
-}
-
-
-function showMyBD() {
-    if (personalMovieDB.privat != true) {
+},
+    showMyBD: function(hidden) {
+    if (!hidden) {
         console.log(personalMovieDB);
-    } else {
-        console.log("Error");
     }
-}
+},
+    toogleShowMyDB: function() {
+        if (personalMovieDB.privat) {
+            personalMovieDB.privat = false;
+        } else {
+            personalMovieDB.privat = true;
+        }
+    },
+    writeYourGenres: function() {
+        for (let i = 1; i <= 3; i++){
+            let genre = prompt(`What is ur favourite genre? ${i}`);
 
-
-function writeYourGenres() {
-    for (let i = 1; i <= 3; i++){
-        personalMovieDB.genres[i - 1] = prompt(`What is ur favourite genre? ${i}`); 
-    }
+            if(genre == '' || genre == null) {
+                i--;
+            } else
+                personalMovieDB.genres[i - 1] = genre;
+             
+        }
+       
+        personalMovieDB.genres.forEach((item, i) => {
+            console.log(`Favourite genre ${i + 1} is ${item};`);
+        }) 
+            
+        
 }
+};
+
 
 console.log(personalMovieDB);
+console.log("ddasdasd");
 
-start();
-detectPersonalLevel();
-rememberMyFilms();
-showMyBD();
-writeYourGenres();
